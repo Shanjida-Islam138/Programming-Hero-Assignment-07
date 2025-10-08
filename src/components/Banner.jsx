@@ -1,29 +1,47 @@
-import React, { useContext } from "react";
-import { AppContext } from "../context/AppContext";
+import React from "react";
+import { assets } from "../assets/assets";
 
 const Banner = () => {
-  const { inProgress, resolved } = useContext(AppContext);
-
   return (
-    <section className="px-10 py-14 bg-gradient-to-r from-purple-500 to-indigo-500 text-white">
-      <h2 className="text-2xl font-semibold mb-10 text-center">
-        Ticket Overview
-      </h2>
+    <div className="w-full bg-white py-10 px-6 sm:px-10">
+      <div className="flex flex-col sm:flex-row gap-6 sm:gap-10 justify-center items-center">
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-4xl mx-auto">
-        {/* In Progress */}
-        <div className="bg-gradient-to-r from-purple-600 to-indigo-600 rounded-2xl p-8 text-center shadow-lg">
-          <h3 className="text-lg font-medium mb-2">In-Progress</h3>
-          <p className="text-4xl font-bold">{inProgress.length}</p>
+        <div className="w-full sm:w-1/2 h-[250px] rounded-xl flex flex-col justify-center items-center text-white font-[Inter]
+        bg-gradient-to-r from-[#632EE3] to-[#9F62F2] relative overflow-hidden shadow-md">
+          <div
+            className="absolute inset-0 opacity-40"
+            style={{
+              backgroundImage: `url(${assets.vector1}), url(${assets.vector1})`,
+              backgroundRepeat: "no-repeat, no-repeat",
+              backgroundPosition: "left center, right center",
+              backgroundSize: "contain, contain",
+            }}
+          ></div>
+          <div className="relative z-10 text-center">
+            <h2 className="text-lg font-medium tracking-wide">In-Progress</h2>
+            <p className="text-6xl font-bold mt-3">0</p>
+          </div>
         </div>
 
-        {/* Resolved */}
-        <div className="bg-gradient-to-r from-green-500 to-emerald-600 rounded-2xl p-8 text-center shadow-lg">
-          <h3 className="text-lg font-medium mb-2">Resolved</h3>
-          <p className="text-4xl font-bold">{resolved.length}</p>
+        <div className="w-full sm:w-1/2 h-[250px] rounded-xl flex flex-col justify-center items-center text-white font-[Inter]
+        bg-gradient-to-r from-[#54CF68] to-[#00827A] relative overflow-hidden shadow-md">
+          <div
+            className="absolute inset-0 opacity-50"
+            style={{
+              backgroundImage: `url(${assets.vector1}), url(${assets.vector1})`,
+              backgroundRepeat: "no-repeat, no-repeat",
+              backgroundPosition: "left center, right center",
+              backgroundSize: "contain, contain",
+            }}
+          ></div>
+          <div className="relative z-10 text-center">
+            <h2 className="text-lg font-medium tracking-wide">Resolved</h2>
+            <p className="text-6xl font-bold mt-3">0</p>
+          </div>
         </div>
+
       </div>
-    </section>
+    </div>
   );
 };
 
