@@ -1,27 +1,26 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+// src/App.jsx
+import React from "react";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
+import Home from "./pages/Home";
+import { AppProvider } from "./context/AppContext";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div className="navbar bg-base-100 shadow-sm">
-        <div className="flex-1">
-          <a className="text-xl">
-            <img className='w-[60px] h-[60px]' src={navImg}alt="" />
-          </a>
-        </div>
-        <div className="flex-none">
-          <button className="btn btn-square btn-ghost">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="inline-block h-5 w-5 stroke-current"> <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z"></path> </svg>
-          </button>
-        </div>
+    <AppProvider>
+      <div className="flex flex-col min-h-screen">
+        <Navbar />
+        <main className="flex-1">
+          <Home />
+        </main>
+
+        <Footer />
+        <ToastContainer position="top-right" autoClose={2000} hideProgressBar={false} newestOnTop closeOnClick />
       </div>
-    </>
-  )
+    </AppProvider>
+  );
 }
 
-export default App
+export default App;
