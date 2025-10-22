@@ -1,11 +1,15 @@
-// src/main.jsx
-import React from "react";
-import { createRoot } from "react-dom/client";
-import App from "./App";
-import "./index.css"; // tailwind base/imports assumed here
+import React from 'react'
+import { createRoot } from 'react-dom/client'
+import App from './App'
+import { AppContextProvider } from './context/AppContext'
+import './index.css'
+import 'react-toastify/dist/ReactToastify.css'
 
-createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+
+createRoot(document.getElementById('root')).render(
+<React.StrictMode>
+<AppContextProvider>
+<App />
+</AppContextProvider>
+</React.StrictMode>
+)

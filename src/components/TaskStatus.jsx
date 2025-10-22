@@ -3,16 +3,20 @@ import { AppContext } from "../context/AppContext";
 import { toast } from "react-toastify";
 
 const TaskStatus = () => {
-  const { inProgress, completeTask, resolved } = useContext(AppContext);
+  const { taskStatus, resolved, completeTask } = useContext(AppContext);
 
   const handleComplete = (id) => {
-    completeTask(id);
-    toast.success("Task marked as complete!");
+    const ok = completeTask(id);
+    if (ok) {
+      toast.success("Task marked as complete!");
+    } else {
+      toast.error("Unable to complete task");
+    }
   };
 
   return (
     <div className="space-y-6">
-      {/* In Progress */}
+      {/* Task Status Section */}
       <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-100">
         <h3 className="font-semibold text-gray-700">Task Status</h3>
         <p className="text-sm text-gray-400 mt-2">
@@ -20,10 +24,10 @@ const TaskStatus = () => {
         </p>
 
         <div className="mt-4 space-y-3">
-          {inProgress.length === 0 ? (
+          {taskStatus.length === 0 ? (
             <div className="text-sm text-gray-400">No tasks added yet.</div>
           ) : (
-            inProgress.map((t) => (
+            taskStatus.map((t) => (
               <div
                 key={t.id}
                 className="flex items-center justify-between bg-gray-50 p-3 rounded"
@@ -44,7 +48,7 @@ const TaskStatus = () => {
         </div>
       </div>
 
-      {/* Resolved Tasks */}
+      {/* Resolved Task Section */}
       <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-100">
         <h3 className="font-semibold text-gray-700">Resolved Task</h3>
         {resolved.length === 0 ? (
