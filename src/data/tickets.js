@@ -1,11 +1,4 @@
-import vector1 from "./vector1.png";
-import vector2 from "./vector2.png";
 
-
-export const assets = {
-   vector1,
-   vector2
-}
 
 export const ticketsData = [
   {

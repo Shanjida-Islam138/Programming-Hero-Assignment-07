@@ -6,26 +6,26 @@ const TaskStatus = () => {
   const { taskStatus, resolved, completeTask } = useContext(AppContext);
 
   const handleComplete = (id) => {
-    const ok = completeTask(id);
-    if (ok) {
-      toast.success("Task marked as complete!");
+    const done = completeTask(id);
+    if (done) {
+      toast.success("✅ Task marked as complete!");
     } else {
-      toast.error("Unable to complete task");
+      toast.error("⚠️ Could not complete task.");
     }
   };
 
   return (
-    <div className="space-y-6">
-      {/* Task Status Section */}
+    <aside className="space-y-6">
+      {/* In Progress Section */}
       <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-100">
         <h3 className="font-semibold text-gray-700">Task Status</h3>
         <p className="text-sm text-gray-400 mt-2">
-          Select a ticket to add to Task Status
+          Select a ticket to add to Task Status.
         </p>
 
         <div className="mt-4 space-y-3">
           {taskStatus.length === 0 ? (
-            <div className="text-sm text-gray-400">No tasks added yet.</div>
+            <p className="text-sm text-gray-400">No tasks added yet.</p>
           ) : (
             taskStatus.map((t) => (
               <div
@@ -38,7 +38,7 @@ const TaskStatus = () => {
                 </div>
                 <button
                   onClick={() => handleComplete(t.id)}
-                  className="text-sm bg-green-600 text-white px-3 py-1 rounded hover:opacity-90"
+                  className="text-sm bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700 transition"
                 >
                   Complete
                 </button>
@@ -48,9 +48,9 @@ const TaskStatus = () => {
         </div>
       </div>
 
-      {/* Resolved Task Section */}
+      {/* Resolved Section */}
       <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-100">
-        <h3 className="font-semibold text-gray-700">Resolved Task</h3>
+        <h3 className="font-semibold text-gray-700">Resolved Tasks</h3>
         {resolved.length === 0 ? (
           <p className="text-sm text-gray-400 mt-2">No resolved tasks yet.</p>
         ) : (
@@ -66,7 +66,7 @@ const TaskStatus = () => {
           </div>
         )}
       </div>
-    </div>
+    </aside>
   );
 };
 
