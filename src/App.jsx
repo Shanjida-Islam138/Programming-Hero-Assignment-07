@@ -1,3 +1,4 @@
+// src/App.jsx (No significant changes needed, just verifying structure)
 import React from "react";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
@@ -9,7 +10,7 @@ import "react-toastify/dist/ReactToastify.css";
 function App() {
   return (
     <AppContextProvider>
-      <div className="flex flex-col min-h-screen">
+      <div className="flex flex-col min-h-screen bg-gray-50">
         <Navbar />
         <main className="flex-1">
           <Home />
@@ -17,10 +18,14 @@ function App() {
         <Footer />
         <ToastContainer
           position="top-right"
-          autoClose={2000}
+          autoClose={2000} // Shorter autoClose for quick alerts
           hideProgressBar={false}
-          newestOnTop
+          newestOnTop={false}
           closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
         />
       </div>
     </AppContextProvider>

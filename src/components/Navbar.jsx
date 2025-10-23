@@ -5,7 +5,7 @@ const Navbar = () => {
     <header className="sticky top-0 z-50 bg-white shadow-sm border-b border-gray-200">
       <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-3">
         {/* Logo / Title */}
-        <h1 className="text-xl font-bold text-indigo-700 cursor-pointer">
+        <h1 className="text-xl font-bold text-black cursor-pointer">
           CS — Ticket System
         </h1>
 

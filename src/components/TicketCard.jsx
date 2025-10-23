@@ -1,56 +1,113 @@
-import React from "react";
+// src/components/TicketCard.jsx
+import React, { useContext } from "react";
+import { toast } from "react-toastify";
+import { AppContext } from "../context/AppContext";
 
 const PriorityBadge = ({ priority }) => {
-  const base = "px-2 py-0.5 rounded-full text-xs font-semibold";
-  if (priority === "High")
-    return <span className={`${base} bg-red-100 text-red-700`}>HIGH</span>;
-  if (priority === "Medium")
-    return (
-      <span className={`${base} bg-yellow-100 text-yellow-700`}>MEDIUM</span>
-    );
-  return <span className={`${base} bg-green-100 text-green-700`}>LOW</span>;
+    const base = "text-xs font-semibold uppercase";
+    if (priority === "High")
+        return <span className={`${base} text-red-500`}>HIGH PRIORITY</span>; 
+    if (priority === "Medium")
+        return (
+            <span className={`${base} text-yellow-600`}>MEDIUM PRIORITY</span>
+        );
+    return <span className={`${base} text-green-600`}>LOW PRIORITY</span>; 
 };
 
 const StatusPill = ({ status }) => {
-  const base = "px-2 py-0.5 rounded-full text-xs font-medium";
-  if (status === "Open")
-    return <span className={`${base} bg-green-50 text-green-700`}>Open</span>;
-  if (status === "In-Progress")
+    // Custom colors from your requirement
+    const IN_PROGRESS_BG = "#F8F3B9";
+    const IN_PROGRESS_TEXT = "#FEBB0C";
+    const OPEN_BG = "#B9F8CF";
+    const OPEN_TEXT = "#02A53B";
+    const RESOLVED_BG = "#e5e7eb"; 
+    const RESOLVED_TEXT = "#6b7280"; 
+
+    const base = "px-2 py-0.5 rounded-full text-xs font-medium";
+    const fontStyle = { fontFamily: 'Inter, sans-serif' };
+
+    if (status === "Open")
+        return (
+            <span 
+                className={base} 
+                style={{ backgroundColor: OPEN_BG, color: OPEN_TEXT, ...fontStyle }}
+            >
+                Open
+            </span>
+        );
+    
+    if (status === "In-Progress") 
+        return (
+            <span 
+                className={base} 
+                style={{ backgroundColor: IN_PROGRESS_BG, color: IN_PROGRESS_TEXT, ...fontStyle }}
+            >
+                In-Progress
+            </span>
+        );
+        
     return (
-      <span className={`${base} bg-yellow-50 text-yellow-700`}>In-Progress</span>
+        <span 
+            className={base} 
+            style={{ backgroundColor: RESOLVED_BG, color: RESOLVED_TEXT, ...fontStyle }}
+        >
+            Resolved
+        </span>
     );
-  return <span className={`${base} bg-gray-100 text-gray-700`}>Resolved</span>;
 };
 
-const TicketCard = ({ ticket, onClick }) => {
-  return (
-    <div
-      onClick={() => onClick(ticket)}
-      className="bg-white rounded-lg shadow-sm p-5 border border-gray-100 hover:shadow-md cursor-pointer transition"
-    >
-      <div className="flex justify-between items-start">
-        <h4 className="text-md font-semibold text-gray-800">
-          {ticket.title}
-        </h4>
-        <StatusPill status={ticket.status} />
-      </div>
+const TicketCard = ({ ticket }) => {
+    const { addToTaskStatus } = useContext(AppContext);
 
-      <p className="text-sm text-gray-600 mt-2 line-clamp-3">
-        {ticket.description}
-      </p>
+    const handleCardClick = () => {
+        if (ticket.status === 'Open') {
+            const success = addToTaskStatus(ticket);
+            if (success) {
+                // Simplified toast message
+                toast.success(`Ticket #${ticket.id} is now in progress.`);
+            } 
+        } else {
+            // Simplified info message
+            toast.info(`Ticket #${ticket.id} is already ${ticket.status}.`);
+        }
+    };
 
-      <div className="mt-4 flex items-center justify-between text-xs text-gray-500">
-        <div className="flex items-center gap-2">
-          <span className="text-gray-400">#{ticket.id}</span>
-          <PriorityBadge priority={ticket.priority} />
+    const dateParts = ticket.createdAt.split('-'); 
+    const formattedDate = `${parseInt(dateParts[1])}/${parseInt(dateParts[2])}/${dateParts[0]}`; 
+
+    return (
+        <div
+            onClick={handleCardClick} 
+            style={{ fontFamily: 'Inter, sans-serif' }}
+            className="bg-white rounded-lg p-4 border border-gray-200 shadow-sm hover:shadow-md cursor-pointer transition"
+        >
+            {/* Header: Title and Status Pill */}
+            <div className="flex justify-between items-start mb-1">
+                <h4 className="text-lg font-semibold text-gray-800 leading-snug">
+                    {ticket.title}
+                </h4>
+                <StatusPill status={ticket.status} /> 
+            </div>
+
+            {/* Description */}
+            <p className="text-sm text-gray-600 line-clamp-3 mb-3 leading-tight">
+                {ticket.description}
+            </p>
+
+            {/* Footer Row */}
+            <div className="flex items-center justify-between text-xs text-gray-500 pt-1">
+                <div className="flex items-center gap-4">
+                    <span className="text-gray-500 font-normal">#{ticket.id}</span>
+                    <PriorityBadge priority={ticket.priority} />
+                </div>
+
+                <div className="flex items-center gap-4">
+                    <span className="text-gray-700 font-medium">{ticket.customer}</span>
+                    <span className="text-gray-500">{formattedDate}</span> 
+                </div>
+            </div>
         </div>
-        <div className="flex items-center gap-4">
-          <span>{ticket.customer}</span>
-          <span>{ticket.createdAt}</span>
-        </div>
-      </div>
-    </div>
-  );
+    );
 };
 
 export default TicketCard;
