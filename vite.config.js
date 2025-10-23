@@ -5,7 +5,7 @@ import tailwindcss from '@tailwindcss/vite'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react(),  tailwindcss()],
-   base: './', 
+   base: 'https://github.com/Shanjida-Islam138/Programming-Hero-Assignment-07', 
  
 
 })
