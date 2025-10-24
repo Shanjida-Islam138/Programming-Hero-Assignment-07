@@ -1,4 +1,4 @@
-// src/components/TaskStatus.jsx
+
 import React, { useContext } from "react";
 import { toast } from "react-toastify";
 import { AppContext } from "../context/AppContext";
@@ -9,18 +9,18 @@ const TaskStatus = () => {
     const handleComplete = (ticketId) => {
         const success = completeTask(ticketId);
         if (success) {
-            // Simplified toast message
+   
             toast.success(`Ticket #${ticketId} resolved.`);
         }
     };
     
-    // Custom colors for bullet points
+
     const IN_PROGRESS_BULLET = "#FEBB0C";
     const RESOLVED_BULLET = "#02A53B"; 
 
     return (
         <div className="space-y-8" style={{ fontFamily: 'Inter, sans-serif' }}>
-            {/* Task Status Section (In-Progress) */}
+        
             <div>
                 <h2 className="text-xl font-bold text-gray-800 mb-4">Task Status</h2> 
                 <p className="text-sm text-gray-600 mb-4">Select a ticket to add to Task Status</p>
@@ -32,7 +32,7 @@ const TaskStatus = () => {
                         {taskStatus.map((task) => (
                             <div key={task.id} className="flex justify-between items-center p-3 border-b border-gray-100 last:border-b-0 bg-white rounded-lg shadow-sm">
                                 <p className="text-sm text-gray-800 font-medium flex items-center gap-2">
-                                    {/* In-Progress Bullet */}
+                    
                                     <span style={{ 
                                         height: '8px', 
                                         width: '8px', 
@@ -54,10 +54,9 @@ const TaskStatus = () => {
                 )}
             </div>
 
-            {/* --- Separator --- */}
+      
             <div className="border-t border-gray-200"></div> 
 
-            {/* Resolved Task Section */}
             <div>
                 <h2 className="text-xl font-bold text-gray-800 mb-4">Resolved Task</h2>
                 
@@ -68,7 +67,7 @@ const TaskStatus = () => {
                         {resolved.map((task) => (
                             <div key={task.id} className="flex justify-between items-center p-3 border-b border-gray-100 last:border-b-0 bg-white rounded-lg shadow-sm opacity-70">
                                 <p className="text-sm text-gray-600 line-through flex items-center gap-2">
-                                    {/* Resolved Bullet */}
+              
                                     <span style={{ 
                                         height: '8px', 
                                         width: '8px', 

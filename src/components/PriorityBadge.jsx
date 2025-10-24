@@ -1,4 +1,4 @@
-// src/components/PriorityBadge.jsx
+
 import React from 'react';
 
 export const PriorityBadge = ({ priority }) => {

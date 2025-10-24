@@ -1,4 +1,4 @@
-// src/components/TicketCard.jsx
+
 import React, { useContext } from "react";
 import { toast } from "react-toastify";
 import { AppContext } from "../context/AppContext";
@@ -15,7 +15,7 @@ const PriorityBadge = ({ priority }) => {
 };
 
 const StatusPill = ({ status }) => {
-    // Custom colors from your requirement
+
     const IN_PROGRESS_BG = "#F8F3B9";
     const IN_PROGRESS_TEXT = "#FEBB0C";
     const OPEN_BG = "#B9F8CF";
@@ -63,11 +63,11 @@ const TicketCard = ({ ticket }) => {
         if (ticket.status === 'Open') {
             const success = addToTaskStatus(ticket);
             if (success) {
-                // Simplified toast message
+            
                 toast.success(`Ticket #${ticket.id} is now in progress.`);
             } 
         } else {
-            // Simplified info message
+ 
             toast.info(`Ticket #${ticket.id} is already ${ticket.status}.`);
         }
     };
@@ -81,7 +81,6 @@ const TicketCard = ({ ticket }) => {
             style={{ fontFamily: 'Inter, sans-serif' }}
             className="bg-white rounded-lg p-4 border border-gray-200 shadow-sm hover:shadow-md cursor-pointer transition"
         >
-            {/* Header: Title and Status Pill */}
             <div className="flex justify-between items-start mb-1">
                 <h4 className="text-lg font-semibold text-gray-800 leading-snug">
                     {ticket.title}
@@ -89,12 +88,12 @@ const TicketCard = ({ ticket }) => {
                 <StatusPill status={ticket.status} /> 
             </div>
 
-            {/* Description */}
+            {/* ----------------Description--------------- */}
             <p className="text-sm text-gray-600 line-clamp-3 mb-3 leading-tight">
                 {ticket.description}
             </p>
 
-            {/* Footer Row */}
+            
             <div className="flex items-center justify-between text-xs text-gray-500 pt-1">
                 <div className="flex items-center gap-4">
                     <span className="text-gray-500 font-normal">#{ticket.id}</span>
